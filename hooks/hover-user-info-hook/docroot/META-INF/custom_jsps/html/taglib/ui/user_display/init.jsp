@@ -20,8 +20,11 @@
 <%@ page import="com.liferay.portlet.blogs.model.BlogsStatsUser" %>
 <%@ page import="com.liferay.portlet.blogs.service.BlogsStatsUserLocalServiceUtil" %>
 <%@ page import="com.liferay.portal.model.Address" %>
+<%@ page import="com.liferay.portlet.social.model.SocialRelationConstants" %>
+<%@ page import="com.liferay.portal.util.comparator.UserLoginDateComparator" %>
 
 <%
+final int FRIEND_IMAGES_COUNT = 5;
 String userName = GetterUtil.getString((String)request.getAttribute("liferay-ui:user-display:user-name"));
 User userDisplay = (User)request.getAttribute("liferay-ui:user-display:user");
 String url = (String)request.getAttribute("liferay-ui:user-display:url");

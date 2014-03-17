@@ -49,34 +49,60 @@ if (Validator.isNull(url) && (userDisplay != null)) {
 	
 	<div class="user-details">
 	
-		<!-- custom code -->
-		<%
-		BlogsStatsUser statsUser = BlogsStatsUserLocalServiceUtil.getStatsUser(groupId, userId);
-		List<Address> addresses = userDisplay.getAddresses();
-		%>
-		<div class="blogger-post-count">
-			<span><liferay-ui:message key="posts" />:</span> <%= statsUser.getEntryCount() %>
-		</div>
-	
-		<div class="blogger-stars">
-			<span><liferay-ui:message key="stars" />:</span> <%= statsUser.getRatingsTotalEntries() %>
-		</div>
-		
-		<div class="last-post-date">
-			<span><liferay-ui:message key="last-post-date" />:</span> <%= dateFormatDate.format(statsUser.getLastPostDate()) %>
-		</div>
-		
-		<c:if test="<%= !addresses.isEmpty() %>">
-			<div class="user-address">
-				<span><%= addresses.get(0).getCity() %></span>
-				<span><%= addresses.get(0).getCountry().getName(themeDisplay.getLocale()) %></span>
+		<div class="user-pop-up" style="background-color: yellow;">
+			
+			<!-- custom code -->
+			<%
+			BlogsStatsUser statsUser = BlogsStatsUserLocalServiceUtil.getStatsUser(groupId, userId);
+			List<Address> addresses = userDisplay.getAddresses();
+			%>
+			<div class="blogger-post-count">
+				<span><liferay-ui:message key="posts" />:</span> <%= statsUser.getEntryCount() %>
 			</div>
-		</c:if>
 		
-		<c:if test="<%= Validator.isNotNull(userDisplay.getJobTitle()) %>">
-			<div class="user-post-title">
-				<span><%= userDisplay.getJobTitle() %></span>
+			<div class="blogger-stars">
+				<span><liferay-ui:message key="stars" />:</span> <%= statsUser.getRatingsTotalEntries() %>
 			</div>
-		</c:if>
+			
+			<c:if test="<%= Validator.isNotNull(statsUser.getLastPostDate()) %>">
+				<div class="last-post-date">
+					<span><liferay-ui:message key="last-post-date" />:</span> <%= dateFormatDate.format(statsUser.getLastPostDate()) %>
+				</div>
+			</c:if>
+			
+			<c:if test="<%= !addresses.isEmpty() %>">
+				<div class="user-address">
+					<span><%= HtmlUtil.escape(addresses.get(0).getCity()) %></span>
+					<span><%= HtmlUtil.escape(addresses.get(0).getCountry().getName(themeDisplay.getLocale())) %></span>
+				</div>
+			</c:if>
+			
+			<c:if test="<%= Validator.isNotNull(userDisplay.getJobTitle()) %>">
+				<div class="user-post-title">
+					<span><%= HtmlUtil.escape(userDisplay.getJobTitle()) %></span>
+				</div>
+			</c:if>
+			
+			<div class="user-friends">
+				<%
+				List<User> friends = UserLocalServiceUtil.getSocialUsers(userDisplay.getUserId(), SocialRelationConstants.TYPE_BI_FRIEND, 0, FRIEND_IMAGES_COUNT, new UserLoginDateComparator());
+				for (User friend : friends) {
+					String friendImagePath = friend.getPortraitURL(themeDisplay);
+					String friendAlt = HtmlUtil.escapeAttribute(friend.getFullName());
+					String friendUrl = friend.getDisplayURL(themeDisplay);
+				%>
+					<aui:a href="<%= friendUrl %>">
+						<span class="user-profile-image">
+							<img alt="<%= friendAlt %>" title="<%= HtmlUtil.escape(friend.getFullName())  %>" class="avatar" src="<%= HtmlUtil.escape(friendImagePath) %>" width="65" />
+						</span>
+						
+						<!-- the username could appear when hovering the user avatar -->
+					</aui:a>
+				<%
+				}
+				%>
+			</div>
+		
+		</div>
 		
 		
