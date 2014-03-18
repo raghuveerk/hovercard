@@ -22,8 +22,6 @@
 <%@ page import="com.liferay.portal.model.Address" %>
 <%@ page import="com.liferay.portlet.social.model.SocialRelationConstants" %>
 <%@ page import="com.liferay.portal.util.comparator.UserLoginDateComparator" %>
-<%@ page import="com.liferay.portal.model.PortletPreferences" %>
-<%@ page import="com.liferay.portal.service.PortletPreferencesLocalServiceUtil" %>
 
 <%
 final int FRIEND_IMAGES_COUNT = 5;
