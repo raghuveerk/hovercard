@@ -53,16 +53,6 @@ if (Validator.isNull(url) && (userDisplay != null)) {
 			
 			<!-- custom code -->
 			<%
-			try {
-				List<PortletPreferences> preferences = PortletPreferencesLocalServiceUtil.getPortletPreferences(themeDisplay.getPlid(), "hoveruserinfo_WAR_hoveruserinfoportlet");
-				
-				for (PortletPreferences preference : preferences) {
-					_log.info(preference.getPreferences());
-				}
-				
-			} catch (Exception e) {
-				
-			}
 			BlogsStatsUser statsUser = BlogsStatsUserLocalServiceUtil.getStatsUser(groupId, userId);
 			List<Address> addresses = userDisplay.getAddresses();
 			%>
