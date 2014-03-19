@@ -4,6 +4,33 @@
 	<author>juancarrillo</author>
 	<namespace>rivetlogic</namespace>
 
-	<entity name="">
+	<entity name="UserDisplayPreference" local-service="true">
+		
+		<!-- PK fields -->
+
+		<column name="preferenceId" type="long" primary="true" />
+		
+		<!-- Audit fields -->
+		
+		<column name="companyId" type="long" />
+		
+		<!-- Other fields -->
+		
+		<column name="addFriend" type="boolean"/>
+		<column name="commonFriendsCount" type="boolean"/>
+		<column name="commonFriendsImages" type="boolean"/>
+		<column name="jobTitle" type="boolean"/>
+		<column name="joinDate" type="boolean"/>
+		<column name="lastPostDate" type="boolean"/>
+		<column name="location" type="boolean"/>
+		<column name="postsCount" type="boolean"/>
+		<column name="rank" type="boolean"/>
+		<column name="stars" type="boolean"/>
+		
+		<finder name="CompanyId" return-type="Collection">
+			<finder-column name="companyId" />
+		</finder>
+		
 	</entity>
+	
 </service-builder>

@@ -28,18 +28,23 @@
 <%@ page import="com.liferay.portal.kernel.portlet.LiferayWindowState"%>
 <%@ page import="com.liferay.portal.kernel.language.LanguageUtil" %>
 <%@ page import="com.liferay.portal.theme.ThemeDisplay" %>
-<%@ page import="com.liferay.portal.kernel.util.WebKeys" %>
 <%@ page import="com.liferay.portal.theme.PortletDisplay" %>
 <%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.Validator" %>
 <%@ page import="com.liferay.portal.util.PortalUtil" %>
-<%@page import="com.liferay.portal.kernel.util.GetterUtil"%>
+<%@ page import="com.liferay.portal.kernel.util.GetterUtil"%>
+
+<%@ page import="com.rivetlogic.hoveruserinfo.model.UserDisplayPreference"%>
+<%@ page import="com.rivetlogic.hoveruserinfo.util.WebKeys" %>
 
 <portlet:defineObjects />
 <liferay-theme:defineObjects />
 
+<liferay-ui:error key="error-changing-preferences" message="error-changing-preferences"/>
+
 <%
 String currentURL = PortalUtil.getCurrentURL(request);
+UserDisplayPreference userDisplayPreference = (UserDisplayPreference) request.getAttribute(WebKeys.USER_DISPLAY_PREFERENCE);
 %>
 
 <portlet:actionURL name="savePreferences" var="savePreferencesURL">
@@ -50,25 +55,27 @@ String currentURL = PortalUtil.getCurrentURL(request);
 
 	<aui:fieldset label="hui-show-message">
 	
-		<aui:input name="addFriend" label="hui-add-friend" type="checkbox"/>
+		<aui:model-context bean="<%= userDisplayPreference %>" model="<%= UserDisplayPreference.class %>"/>
 	
-		<aui:input name="commonFriendsCount" label="hui-common-friends-count" type="checkbox"/>
+		<aui:input name="addFriend" label="hui-add-friend" />
+	
+		<aui:input name="commonFriendsCount" label="hui-common-friends-count" />
 		
-		<aui:input name="commonFriendsImages" label="hui-common-friends-images" type="checkbox"/>
+		<aui:input name="commonFriendsImages" label="hui-common-friends-images" />
 		
-		<aui:input name="jobTitle" label="hui-job-title" type="checkbox"/>
+		<aui:input name="jobTitle" label="hui-job-title" />
 		
-		<aui:input name="joinDate" label="hui-join-date" type="checkbox"/>
+		<aui:input name="joinDate" label="hui-join-date" />
 		
-		<aui:input name="lastPostDate" label="hui-last-post-date" type="checkbox"/>
+		<aui:input name="lastPostDate" label="hui-last-post-date" />
 		
-		<aui:input name="location" label="hui-location" type="checkbox"/>
+		<aui:input name="location" label="hui-location" />
 		
-		<aui:input name="postsCount" label="hui-posts-count" type="checkbox"/>
+		<aui:input name="postsCount" label="hui-posts-count" />
 		
-		<aui:input name="rank" label="hui-rank" type="checkbox"/>
+		<aui:input name="rank" label="hui-rank" />
 		
-		<aui:input name="stars" label="hui-stars" type="checkbox"/>
+		<aui:input name="stars" label="hui-stars" />
 		
 	</aui:fieldset>
 	
