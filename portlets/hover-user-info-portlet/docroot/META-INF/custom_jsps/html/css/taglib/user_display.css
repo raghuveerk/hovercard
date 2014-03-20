@@ -1,0 +1,50 @@
+.taglib-user-display {
+	padding: 0.5em;
+
+	&.display-style-1 {
+		.user-profile-image {
+			float: left;
+			margin-right: 1.5em;
+		}
+	}
+
+	&.display-style-2 {
+		.user-profile-image, .user-name {
+			clear: both;
+			display: block;
+			text-align: center;
+		}
+	}
+
+	.user-details {
+		margin-top: 1em;
+	}
+}
+
+/* Skin */
+
+.taglib-user-display {
+	a .user-name {
+		text-decoration: underline;
+	}
+
+	.user-name {
+		font-size: 1.1em;
+		font-weight: bold;
+	}
+	
+	.user-pop-up {
+		display: block;
+		position: absolute; 
+		left: 18%; 
+		top: 10%;
+		padding: 10px; 
+		border: 1px solid #ccc;
+		background-color: #ffffff;
+		width: 50%;
+		z-index: 100;
+		-moz-box-shadow: 1px 3px 3px 1px #ccc;
+		-webkit-box-shadow: 1px 3px 3px 1px #ccc;
+		box-shadow: 1px 3px 3px 1px #ccc;
+	}
+}
