@@ -36,7 +36,25 @@ if (Validator.isNull(url) && (userDisplay != null)) {
 		taglibSrc = UserConstants.getPortraitURL(themeDisplay.getPathImage(), true, 0);
 	}
 	%>
-
+    <style>
+        .user-details{
+            display: block; /* ensures it’s invisible until it’s called */
+            position: absolute; /* makes the div go into a position that’s absolute to the browser viewing area */
+            left: 18%; /* positions the div half way horizontally */
+            top: 10%; /* positions the div half way vertically */
+            padding: 10px; 
+            border: 1px solid #ccc;
+            background-color: #ffffff;
+            width: 50%;
+            z-index: 100; /* makes the div the top layer, so it’ll lay on top of the other content */
+            -moz-box-shadow: 1px 3px 3px 1px #ccc;
+            -webkit-box-shadow: 1px 3px 3px 1px #ccc;
+            box-shadow: 1px 3px 3px 1px #ccc;
+        }
+    </style>
+    <script>
+        
+    </script>
 	<aui:a href="<%= url %>">
 		<span class="user-profile-image">
 			<img alt="<%= taglibAlt %>" class="avatar" src="<%= HtmlUtil.escape(taglibSrc) %>" width="65" />
@@ -49,7 +67,7 @@ if (Validator.isNull(url) && (userDisplay != null)) {
 	
 	<div class="user-details">
 	
-		<div class="user-pop-up" style="background-color: yellow;">
+		<div class="user-pop-up">
 			
 			<!-- custom code -->
 			<%
