@@ -53,33 +53,33 @@ UserDisplayPreference userDisplayPreference = (UserDisplayPreference) request.ge
 
 <aui:form name="savePreferences_fm" action="<%= savePreferencesURL %>">
 
-	<aui:fieldset label="hui-show-message">
+	<aui:fieldset label="select-user-display">
 	
 		<aui:model-context bean="<%= userDisplayPreference %>" model="<%= UserDisplayPreference.class %>"/>
 	
-		<aui:input name="addFriend" label="hui-add-friend" />
+		<aui:input name="addFriend" label="add-friend" />
 	
-		<aui:input name="commonFriendsCount" label="hui-common-friends-count" />
+		<aui:input name="commonFriendsCount" label="common-friends-count" />
 		
-		<aui:input name="commonFriendsImages" label="hui-common-friends-images" />
+		<aui:input name="commonFriendsImages" label="common-friends-images" />
 		
-		<aui:input name="jobTitle" label="hui-job-title" />
+		<aui:input name="jobTitle" label="job-title" />
 		
-		<aui:input name="joinDate" label="hui-join-date" />
+		<aui:input name="joinDate" label="join-date" />
 		
-		<aui:input name="lastPostDate" label="hui-last-post-date" />
+		<aui:input name="lastPostDate" label="last-post-date" />
 		
-		<aui:input name="location" label="hui-location" />
+		<aui:input name="location" label="location" />
 		
-		<aui:input name="postsCount" label="hui-posts-count" />
+		<aui:input name="postsCount" label="posts-count" />
 		
-		<aui:input name="rank" label="hui-rank" />
+		<aui:input name="rank" label="rank" />
 		
-		<aui:input name="stars" label="hui-stars" />
+		<aui:input name="stars" label="stars" />
 		
 	</aui:fieldset>
 	
-	<aui:input name="submit" label="" value='<%= LanguageUtil.get(pageContext, "hui-save") %>' type="submit"/>
+	<aui:input name="submit" label="" value='<%= LanguageUtil.get(pageContext, "save") %>' type="submit"/>
 		
 </aui:form>
 

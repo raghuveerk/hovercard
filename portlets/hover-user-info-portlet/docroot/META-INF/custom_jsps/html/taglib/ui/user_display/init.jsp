@@ -16,20 +16,27 @@
 
 <%@ include file="/html/taglib/init.jsp" %>
 
-<%@ page import="com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.blogs.model.BlogsStatsUser" %>
 <%@ page import="com.liferay.portlet.blogs.service.BlogsStatsUserLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.messageboards.model.MBStatsUser" %>
+<%@ page import="com.liferay.portlet.messageboards.service.MBStatsUserLocalServiceUtil" %>
 <%@ page import="com.liferay.portal.model.Address" %>
 <%@ page import="com.liferay.portlet.social.model.SocialRelationConstants" %>
 <%@ page import="com.liferay.portal.util.comparator.UserLoginDateComparator" %>
+<%@ page import="com.liferay.portlet.expando.service.ExpandoValueLocalServiceUtil" %>
 
 <%
 final int FRIEND_IMAGES_COUNT = 5;
-String userName = GetterUtil.getString((String)request.getAttribute("liferay-ui:user-display:user-name"));
+				 
 User userDisplay = (User)request.getAttribute("liferay-ui:user-display:user");
-String url = (String)request.getAttribute("liferay-ui:user-display:url");
-int displayStyle = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:user-display:displayStyle"));
+				 
+long companyId = themeDisplay.getCompanyId();
 long groupId = themeDisplay.getScopeGroupId();
 long userId = userDisplay.getUserId();
+
+String userName = GetterUtil.getString((String)request.getAttribute("liferay-ui:user-display:user-name"));
+String url = (String)request.getAttribute("liferay-ui:user-display:url");
+int displayStyle = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:user-display:displayStyle"));
 Format dateFormatDate = FastDateFormatFactoryUtil.getDate(locale, timeZone);
+
 %>
