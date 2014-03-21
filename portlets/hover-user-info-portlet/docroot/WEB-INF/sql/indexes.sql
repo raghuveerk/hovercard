@@ -1,1 +1,0 @@
-create index IX_2007ABDF on rivetlogic_UserDisplayPreference (companyId);
