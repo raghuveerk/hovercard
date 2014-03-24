@@ -53,75 +53,89 @@ if (Validator.isNull(url) && (userDisplay != null)) {
 		<div class="user-pop-up">
 		
 			<%
-			String userEmailAddress = userDisplay.getDisplayEmailAddress();
-			List<Phone> phones = userDisplay.getPhones();
-			List<User> friends = UserLocalServiceUtil.getSocialUsers(userId, SocialRelationConstants.TYPE_BI_FRIEND, 0, FRIEND_IMAGES_COUNT, new UserLoginDateComparator());
-			int friendsCount = UserLocalServiceUtil.getSocialUsersCount(userId, SocialRelationConstants.TYPE_BI_FRIEND);
-			List<User> commonFriends = UserLocalServiceUtil.getSocialUsers(userId, themeDisplay.getUserId(), SocialRelationConstants.TYPE_BI_FRIEND, 0, FRIEND_IMAGES_COUNT, new UserLoginDateComparator());
-			int commonFriendsCount = UserLocalServiceUtil.getSocialUsersCount(userId, themeDisplay.getUserId(), SocialRelationConstants.TYPE_BI_FRIEND);
+			boolean showCommonFriends = PrefsPropsUtil.getBoolean(companyId, HOVER_USER_INFO_COMMON_FRIENDS, true);
+			boolean showEmailAddress = PrefsPropsUtil.getBoolean(companyId, HOVER_USER_INFO_EMAIL_ADDRESS, true);
+			boolean showFriends = PrefsPropsUtil.getBoolean(companyId, HOVER_USER_INFO_FRIENDS, true);
+			boolean showPhoneNumber = PrefsPropsUtil.getBoolean(companyId, HOVER_USER_INFO_PHONE_NUMBER, true);
 			%>
 		
 			<dl>
-				<dt><liferay-ui:message key="email-address"/></dt>
-				<dd>
-					<% %>
-					<aui:a href="mailto:<%= HtmlUtil.escape(userEmailAddress) %>">
-						<span><%= HtmlUtil.escape(userEmailAddress) %></span>
-					</aui:a>
-				</dd>
-				<c:if test="<%= !phones.isEmpty() %>">
-					<dt>
-						<c:choose>
-							<c:when test="<%= phones.size() > 2 %>">
-								<liferay-ui:message key="phone-numbers" />
-							</c:when>
-							<c:otherwise>
-								<liferay-ui:message key="phone-number" />
-							</c:otherwise>
-						</c:choose>
-					</dt>
+				<c:if test="<%= showEmailAddress %>">
+					<dt><liferay-ui:message key="email-address"/></dt>
 					<dd>
-						<%for (Phone phone : phones) {%>
-							<span><%= phone.getNumber() %></span>
-						<%}%>
+						<%String userEmailAddress = userDisplay.getDisplayEmailAddress(); %>
+						<aui:a href="mailto:<%= HtmlUtil.escape(userEmailAddress) %>">
+							<span><%= HtmlUtil.escape(userEmailAddress) %></span>
+						</aui:a>
 					</dd>
 				</c:if>
-				
-				<dt><liferay-ui:message key="friends" />&nbsp;<%= HtmlUtil.escape("("+friendsCount+")") %></dt>
-				<dd>
+				<c:if test="<%= showPhoneNumber %>">
+					<%List<Phone> phones = userDisplay.getPhones();%>
+					<c:if test="<%= !phones.isEmpty() %>">
+						<dt>
+							<c:choose>
+								<c:when test="<%= phones.size() > 2 %>">
+									<liferay-ui:message key="phone-numbers" />
+								</c:when>
+								<c:otherwise>
+									<liferay-ui:message key="phone-number" />
+								</c:otherwise>
+							</c:choose>
+						</dt>
+						<dd>
+							<%for (Phone phone : phones) {%>
+								<span><%= phone.getNumber() %></span>
+							<%}%>
+						</dd>
+					</c:if>
+				</c:if>
+				<c:if test="<%= showFriends %>">
 					<%
-					for (User friend : friends) {
-						String friendImagePath = friend.getPortraitURL(themeDisplay);
-						String friendAlt = HtmlUtil.escapeAttribute(friend.getFullName());
-						String friendUrl = friend.getDisplayURL(themeDisplay);
+					List<User> friends = UserLocalServiceUtil.getSocialUsers(userId, SocialRelationConstants.TYPE_BI_FRIEND, 0, FRIEND_IMAGES_COUNT, new UserLoginDateComparator());
+					int friendsCount = UserLocalServiceUtil.getSocialUsersCount(userId, SocialRelationConstants.TYPE_BI_FRIEND);
 					%>
-					<aui:a href="<%= friendUrl %>">
-						<span class="user-profile-image">
-							<img alt="<%= friendAlt %>" title="<%= HtmlUtil.escape(friend.getFullName())  %>" class="avatar" src="<%= HtmlUtil.escape(friendImagePath) %>" width="65" />
-						</span>
-					</aui:a>
-					<%
-					}
-					%>
-				</dd>
-				<dt><liferay-ui:message key="common-friends" />&nbsp;<%= HtmlUtil.escape("("+commonFriendsCount+")") %></dt>
-				<dd>
-					<%
-					for (User friend : commonFriends) {
-						String friendImagePath = friend.getPortraitURL(themeDisplay);
-						String friendAlt = HtmlUtil.escapeAttribute(friend.getFullName());
-						String friendUrl = friend.getDisplayURL(themeDisplay);
-					%>
+					<dt><liferay-ui:message key="friends" />&nbsp;<%= HtmlUtil.escape("("+friendsCount+")") %></dt>
+					<dd>
+						<%
+						for (User friend : friends) {
+							String friendImagePath = friend.getPortraitURL(themeDisplay);
+							String friendAlt = HtmlUtil.escapeAttribute(friend.getFullName());
+							String friendUrl = friend.getDisplayURL(themeDisplay);
+						%>
 						<aui:a href="<%= friendUrl %>">
 							<span class="user-profile-image">
 								<img alt="<%= friendAlt %>" title="<%= HtmlUtil.escape(friend.getFullName())  %>" class="avatar" src="<%= HtmlUtil.escape(friendImagePath) %>" width="65" />
 							</span>
-							
 						</aui:a>
+						<%
+						}
+						%>
+					</dd>
+				</c:if>
+				<c:if test="<%= showCommonFriends %>">
 					<%
-					}
+					List<User> commonFriends = UserLocalServiceUtil.getSocialUsers(userId, themeDisplay.getUserId(), SocialRelationConstants.TYPE_BI_FRIEND, 0, FRIEND_IMAGES_COUNT, new UserLoginDateComparator());
+					int commonFriendsCount = UserLocalServiceUtil.getSocialUsersCount(userId, themeDisplay.getUserId(), SocialRelationConstants.TYPE_BI_FRIEND);
 					%>
-				</dd>
+					<dt><liferay-ui:message key="common-friends" />&nbsp;<%= HtmlUtil.escape("("+commonFriendsCount+")") %></dt>
+					<dd>
+						<%
+						for (User friend : commonFriends) {
+							String friendImagePath = friend.getPortraitURL(themeDisplay);
+							String friendAlt = HtmlUtil.escapeAttribute(friend.getFullName());
+							String friendUrl = friend.getDisplayURL(themeDisplay);
+						%>
+							<aui:a href="<%= friendUrl %>">
+								<span class="user-profile-image">
+									<img alt="<%= friendAlt %>" title="<%= HtmlUtil.escape(friend.getFullName())  %>" class="avatar" src="<%= HtmlUtil.escape(friendImagePath) %>" width="65" />
+								</span>
+								
+							</aui:a>
+						<%
+						}
+						%>
+					</dd>
+				</c:if>
 			</dl>
 			
 		</div>

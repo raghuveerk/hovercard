@@ -24,6 +24,10 @@
 
 <%
 final int FRIEND_IMAGES_COUNT = 5;
+final String HOVER_USER_INFO_COMMON_FRIENDS = "hover.user.info.common.friends";
+final String HOVER_USER_INFO_EMAIL_ADDRESS = "hover.user.info.email.address";
+final String HOVER_USER_INFO_FRIENDS = "hover.user.info.friends";
+final String HOVER_USER_INFO_PHONE_NUMBER = "hover.user.info.phone.number";
 				 
 User userDisplay = (User)request.getAttribute("liferay-ui:user-display:user");
 				 
@@ -34,6 +38,4 @@ long userId = userDisplay.getUserId();
 String userName = GetterUtil.getString((String)request.getAttribute("liferay-ui:user-display:user-name"));
 String url = (String)request.getAttribute("liferay-ui:user-display:url");
 int displayStyle = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:user-display:displayStyle"));
-Format dateFormatDate = FastDateFormatFactoryUtil.getDate(locale, timeZone);
-
 %>
