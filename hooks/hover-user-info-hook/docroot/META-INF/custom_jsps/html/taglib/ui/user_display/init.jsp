@@ -27,7 +27,7 @@
 <%@ page import="com.liferay.portal.util.comparator.UserLoginDateComparator" %>
 
 <%
-final String HOVER_USER_INFO_VISIBLE = "hover.user.info.visible";
+final String HOVER_USER_INFO_SHOW = "hover.user.info.show";
 final String HOVER_USER_INFO_COMMON_FRIENDS = "hover.user.info.common.friends";
 final String HOVER_USER_INFO_EMAIL_ADDRESS = "hover.user.info.email.address";
 final String HOVER_USER_INFO_FRIENDS = "hover.user.info.friends";

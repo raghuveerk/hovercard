@@ -58,7 +58,8 @@ if (Validator.isNull(url) && (userDisplay != null)) {
 		boolean showFriends = PrefsPropsUtil.getBoolean(companyId, HOVER_USER_INFO_FRIENDS, GetterUtil.getBoolean(PropsUtil.get(HOVER_USER_INFO_FRIENDS)));
 		boolean showPhoneNumber = PrefsPropsUtil.getBoolean(companyId, HOVER_USER_INFO_PHONE_NUMBER, GetterUtil.getBoolean(PropsUtil.get(HOVER_USER_INFO_PHONE_NUMBER)));
 		final int FRIEND_IMAGES_COUNT = GetterUtil.getInteger(PropsUtil.get(HOVER_USER_INFO_IMAGES_COUNT));
-		boolean showPopUp = GetterUtil.getBoolean(PropsUtil.get(HOVER_USER_INFO_VISIBLE));
+		boolean showPopUp = GetterUtil.getBoolean(PropsUtil.get(HOVER_USER_INFO_SHOW));
+		
 		if (showPopUp && !showCommonFriends && !showEmailAddress && !showFriends && !showPhoneNumber) {
 			showPopUp = false;
 		}
