@@ -1,5 +1,9 @@
 <%--
 /**
+ * Copyright (C) 2014 Rivet Logic Corporation. All rights reserved.
+ */
+ 
+/**
  * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
@@ -32,17 +36,15 @@ String adminDefaultRoleNames = PrefsPropsUtil.getString(company.getCompanyId(), 
 String adminDefaultUserGroupNames = PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.ADMIN_DEFAULT_USER_GROUP_NAMES);
 boolean adminSyncDefaultAssociations = PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.ADMIN_SYNC_DEFAULT_ASSOCIATIONS, PropsValues.ADMIN_SYNC_DEFAULT_ASSOCIATIONS);
 
-//custom code
-
 final String HOVER_USER_INFO_COMMON_FRIENDS = "hover.user.info.common.friends";
 final String HOVER_USER_INFO_EMAIL_ADDRESS = "hover.user.info.email.address";
 final String HOVER_USER_INFO_FRIENDS = "hover.user.info.friends";
 final String HOVER_USER_INFO_PHONE_NUMBER = "hover.user.info.phone.number";
 
-boolean showCommonFriends = PrefsPropsUtil.getBoolean(company.getCompanyId(), HOVER_USER_INFO_COMMON_FRIENDS, true);
-boolean showEmailAddress = PrefsPropsUtil.getBoolean(company.getCompanyId(), HOVER_USER_INFO_EMAIL_ADDRESS, true);
-boolean showFriends = PrefsPropsUtil.getBoolean(company.getCompanyId(), HOVER_USER_INFO_FRIENDS, true);
-boolean showPhoneNumber = PrefsPropsUtil.getBoolean(company.getCompanyId(), HOVER_USER_INFO_PHONE_NUMBER, true);
+boolean showCommonFriends = PrefsPropsUtil.getBoolean(company.getCompanyId(), HOVER_USER_INFO_COMMON_FRIENDS, GetterUtil.getBoolean(PropsUtil.get(HOVER_USER_INFO_COMMON_FRIENDS)));
+boolean showEmailAddress = PrefsPropsUtil.getBoolean(company.getCompanyId(), HOVER_USER_INFO_EMAIL_ADDRESS, GetterUtil.getBoolean(PropsUtil.get(HOVER_USER_INFO_EMAIL_ADDRESS)));
+boolean showFriends = PrefsPropsUtil.getBoolean(company.getCompanyId(), HOVER_USER_INFO_FRIENDS, GetterUtil.getBoolean(PropsUtil.get(HOVER_USER_INFO_FRIENDS)));
+boolean showPhoneNumber = PrefsPropsUtil.getBoolean(company.getCompanyId(), HOVER_USER_INFO_PHONE_NUMBER, GetterUtil.getBoolean(PropsUtil.get(HOVER_USER_INFO_PHONE_NUMBER)));
 %>
 
 <h3><liferay-ui:message key="users" /></h3>

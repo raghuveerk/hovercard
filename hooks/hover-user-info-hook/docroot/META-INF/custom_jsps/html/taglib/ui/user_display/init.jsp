@@ -1,5 +1,9 @@
 <%--
 /**
+ * Copyright (C) 2014 Rivet Logic Corporation. All rights reserved.
+ */
+ 
+/**
  * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
@@ -23,12 +27,13 @@
 <%@ page import="com.liferay.portal.util.comparator.UserLoginDateComparator" %>
 
 <%
-final int FRIEND_IMAGES_COUNT = 5;
+final String HOVER_USER_INFO_VISIBLE = "hover.user.info.visible";
 final String HOVER_USER_INFO_COMMON_FRIENDS = "hover.user.info.common.friends";
 final String HOVER_USER_INFO_EMAIL_ADDRESS = "hover.user.info.email.address";
 final String HOVER_USER_INFO_FRIENDS = "hover.user.info.friends";
 final String HOVER_USER_INFO_PHONE_NUMBER = "hover.user.info.phone.number";
-				 
+final String HOVER_USER_INFO_IMAGES_COUNT = "hover.user.info.friends.images";
+				
 User userDisplay = (User)request.getAttribute("liferay-ui:user-display:user");
 				 
 long companyId = themeDisplay.getCompanyId();
