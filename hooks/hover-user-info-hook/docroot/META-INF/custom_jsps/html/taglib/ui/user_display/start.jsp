@@ -112,46 +112,62 @@ if (Validator.isNull(url) && (userDisplay != null)) {
 						int friendsCount = UserLocalServiceUtil.getSocialUsersCount(userId, SocialRelationConstants.TYPE_BI_FRIEND);
 						%>
 						<dt><liferay-ui:message key="friends" />&nbsp;<%= HtmlUtil.escape("("+friendsCount+")") %></dt>
-						<dd>
-							<%
-							for (User friend : friends) {
-								String friendImagePath = friend.getPortraitURL(themeDisplay);
-								String friendAlt = HtmlUtil.escapeAttribute(friend.getFullName());
-								String friendUrl = friend.getDisplayURL(themeDisplay);
-							%>
-							<aui:a href="<%= friendUrl %>">
-								<span class="user-profile-image">
-									<img alt="<%= friendAlt %>" title="<%= HtmlUtil.escape(friend.getFullName())  %>" class="avatar" src="<%= HtmlUtil.escape(friendImagePath) %>" width="65" />
-								</span>
-							</aui:a>
-							<%
-							}
-							%>
-						</dd>
+						<c:choose>
+							<c:when test="<%= friendsCount > 0 %>">
+								<dd>
+									<%
+									for (User friend : friends) {
+										String friendImagePath = friend.getPortraitURL(themeDisplay);
+										String friendAlt = HtmlUtil.escapeAttribute(friend.getFullName());
+										String friendUrl = friend.getDisplayURL(themeDisplay);
+									%>
+									<aui:a href="<%= friendUrl %>">
+										<span class="user-profile-image">
+											<img alt="<%= friendAlt %>" title="<%= HtmlUtil.escape(friend.getFullName())  %>" class="avatar" src="<%= HtmlUtil.escape(friendImagePath) %>" width="65" />
+										</span>
+									</aui:a>
+									<%
+									}
+									%>
+								</dd>
+							</c:when>
+							<c:otherwise>
+								<dd><liferay-ui:message key="no-friends"/></dd>
+							</c:otherwise>
+						</c:choose>
+						<c:if test="<%= friendsCount > 0 %>">
+						</c:if>
 					</c:if>
-					<c:if test="<%= showCommonFriends %>">
+					<c:if test="<%= showCommonFriends && themeDisplay.getUserId() != userId %>">
 						<%
 						List<User> commonFriends = UserLocalServiceUtil.getSocialUsers(userId, themeDisplay.getUserId(), SocialRelationConstants.TYPE_BI_FRIEND, 0, FRIEND_IMAGES_COUNT, new UserLoginDateComparator());
 						int commonFriendsCount = UserLocalServiceUtil.getSocialUsersCount(userId, themeDisplay.getUserId(), SocialRelationConstants.TYPE_BI_FRIEND);
 						%>
 						<dt><liferay-ui:message key="common-friends" />&nbsp;<%= HtmlUtil.escape("("+commonFriendsCount+")") %></dt>
-						<dd>
-							<%
-							for (User friend : commonFriends) {
-								String friendImagePath = friend.getPortraitURL(themeDisplay);
-								String friendAlt = HtmlUtil.escapeAttribute(friend.getFullName());
-								String friendUrl = friend.getDisplayURL(themeDisplay);
-							%>
-								<aui:a href="<%= friendUrl %>">
-									<span class="user-profile-image">
-										<img alt="<%= friendAlt %>" title="<%= HtmlUtil.escape(friend.getFullName())  %>" class="avatar" src="<%= HtmlUtil.escape(friendImagePath) %>" width="65" />
-									</span>
-									
-								</aui:a>
-							<%
-							}
-							%>
-						</dd>
+						<c:choose>
+							<c:when test="<%= commonFriendsCount > 0 %>">
+								<dd>
+									<%
+									for (User friend : commonFriends) {
+										String friendImagePath = friend.getPortraitURL(themeDisplay);
+										String friendAlt = HtmlUtil.escapeAttribute(friend.getFullName());
+										String friendUrl = friend.getDisplayURL(themeDisplay);
+									%>
+										<aui:a href="<%= friendUrl %>">
+											<span class="user-profile-image">
+												<img alt="<%= friendAlt %>" title="<%= HtmlUtil.escape(friend.getFullName())  %>" class="avatar" src="<%= HtmlUtil.escape(friendImagePath) %>" width="65" />
+											</span>
+											
+										</aui:a>
+									<%
+									}
+									%>
+								</dd>
+							</c:when>
+							<c:otherwise>
+								<dd><liferay-ui:message key="no-common-friends" /></dd>
+							</c:otherwise>
+						</c:choose>
 					</c:if>
 				</dl>
 				
