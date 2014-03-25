@@ -1,5 +1,5 @@
 .user-pop-up {
-    display: block;
+    display: none;
     position: absolute; 
     left: 18%; 
     top: 10%;
@@ -11,4 +11,15 @@
     -moz-box-shadow: 1px 3px 3px 1px #ccc;
     -webkit-box-shadow: 1px 3px 3px 1px #ccc;
     box-shadow: 1px 3px 3px 1px #ccc;
+}
+
+.user-pop-up dl{
+    margin-bottom:5px;
+    margin-top:5px
+}
+
+.taglib-user-display.display-style-2:hover{
+    .user-pop-up{
+        display:block;
+    }
 }
