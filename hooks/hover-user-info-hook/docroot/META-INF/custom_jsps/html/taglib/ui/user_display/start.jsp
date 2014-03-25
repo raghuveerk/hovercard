@@ -112,7 +112,7 @@ if (Validator.isNull(url) && (userDisplay != null)) {
 						int friendsCount = UserLocalServiceUtil.getSocialUsersCount(userId, SocialRelationConstants.TYPE_BI_FRIEND);
 						%>
 						<dt><liferay-ui:message key="friends" />&nbsp;<%= HtmlUtil.escape("("+friendsCount+")") %></dt>
-						<dd>
+						<dd class="friends">
 							<%
 							for (User friend : friends) {
 								String friendImagePath = friend.getPortraitURL(themeDisplay);
@@ -127,6 +127,7 @@ if (Validator.isNull(url) && (userDisplay != null)) {
 							<%
 							}
 							%>
+							<div class="clearfix"></div>
 						</dd>
 					</c:if>
 					<c:if test="<%= showCommonFriends %>">
@@ -135,7 +136,7 @@ if (Validator.isNull(url) && (userDisplay != null)) {
 						int commonFriendsCount = UserLocalServiceUtil.getSocialUsersCount(userId, themeDisplay.getUserId(), SocialRelationConstants.TYPE_BI_FRIEND);
 						%>
 						<dt><liferay-ui:message key="common-friends" />&nbsp;<%= HtmlUtil.escape("("+commonFriendsCount+")") %></dt>
-						<dd>
+						<dd class="common-friends">
 							<%
 							for (User friend : commonFriends) {
 								String friendImagePath = friend.getPortraitURL(themeDisplay);
@@ -151,6 +152,7 @@ if (Validator.isNull(url) && (userDisplay != null)) {
 							<%
 							}
 							%>
+							<div class="clearfix"></div>
 						</dd>
 					</c:if>
 				</dl>
