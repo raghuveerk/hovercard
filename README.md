@@ -1,2 +1,2 @@
-Liferay Hover User Info
+Liferay Hovercard
 =========================

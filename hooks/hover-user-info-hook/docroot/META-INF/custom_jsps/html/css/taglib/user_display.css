@@ -14,11 +14,39 @@
 			display: block;
 			text-align: center;
 		}
+		
+		&:hover {
+	    	.user-pop-up {
+	    		display:block;
+	    	}
+	    }
 	}
 
 	.user-details {
 		margin-top: 1em;
 	}
+	
+	.user-pop-up {
+	    display: none;
+	    position: absolute; 
+	    left: 18%; 
+	    top: 10%;
+	    padding: 10px; 
+	    border: 1px solid #ccc;
+	    background-color: #ffffff;
+	    width: 50%;
+	    z-index: 100;
+	    -moz-box-shadow: 1px 3px 3px 1px #ccc;
+	    -webkit-box-shadow: 1px 3px 3px 1px #ccc;
+	    box-shadow: 1px 3px 3px 1px #ccc;
+	    
+	    dl {
+		    margin-bottom:5px;
+		    margin-top:5px
+	    }
+	    
+	}
+	
 }
 
 /* Skin */
@@ -33,18 +61,4 @@
 		font-weight: bold;
 	}
 	
-	.user-pop-up {
-		display: block;
-		position: absolute; 
-		left: 18%; 
-		top: 10%;
-		padding: 10px; 
-		border: 1px solid #ccc;
-		background-color: #ffffff;
-		width: 50%;
-		z-index: 100;
-		-moz-box-shadow: 1px 3px 3px 1px #ccc;
-		-webkit-box-shadow: 1px 3px 3px 1px #ccc;
-		box-shadow: 1px 3px 3px 1px #ccc;
-	}
 }

@@ -84,6 +84,7 @@ if (Validator.isNull(url) && (userDisplay != null)) {
 							</dd>
 						</c:if>
 					</c:if>
+					
 					<c:if test="<%= showPhoneNumber %>">
 						<%List<Phone> phones = userDisplay.getPhones();%>
 						<c:if test="<%= !phones.isEmpty() %>">
@@ -106,6 +107,7 @@ if (Validator.isNull(url) && (userDisplay != null)) {
 							</dd>
 						</c:if>
 					</c:if>
+					
 					<c:if test="<%= showFriends %>">
 						<%
 						List<User> friends = UserLocalServiceUtil.getSocialUsers(userId, SocialRelationConstants.TYPE_BI_FRIEND, 0, FRIEND_IMAGES_COUNT, new UserLoginDateComparator());
@@ -114,7 +116,7 @@ if (Validator.isNull(url) && (userDisplay != null)) {
 						<dt><liferay-ui:message key="friends" />&nbsp;<%= HtmlUtil.escape("("+friendsCount+")") %></dt>
 						<c:choose>
 							<c:when test="<%= friendsCount > 0 %>">
-								<dd>
+								<dd class="friends">
 									<%
 									for (User friend : friends) {
 										String friendImagePath = friend.getPortraitURL(themeDisplay);
@@ -135,9 +137,9 @@ if (Validator.isNull(url) && (userDisplay != null)) {
 								<dd><liferay-ui:message key="no-friends"/></dd>
 							</c:otherwise>
 						</c:choose>
-						<c:if test="<%= friendsCount > 0 %>">
-						</c:if>
+						<div class="clearfix"></div>
 					</c:if>
+					
 					<c:if test="<%= showCommonFriends && themeDisplay.getUserId() != userId %>">
 						<%
 						List<User> commonFriends = UserLocalServiceUtil.getSocialUsers(userId, themeDisplay.getUserId(), SocialRelationConstants.TYPE_BI_FRIEND, 0, FRIEND_IMAGES_COUNT, new UserLoginDateComparator());
@@ -146,7 +148,7 @@ if (Validator.isNull(url) && (userDisplay != null)) {
 						<dt><liferay-ui:message key="common-friends" />&nbsp;<%= HtmlUtil.escape("("+commonFriendsCount+")") %></dt>
 						<c:choose>
 							<c:when test="<%= commonFriendsCount > 0 %>">
-								<dd>
+								<dd class="common-friends">
 									<%
 									for (User friend : commonFriends) {
 										String friendImagePath = friend.getPortraitURL(themeDisplay);
@@ -168,9 +170,9 @@ if (Validator.isNull(url) && (userDisplay != null)) {
 								<dd><liferay-ui:message key="no-common-friends" /></dd>
 							</c:otherwise>
 						</c:choose>
+						<div class="clearfix"></div>
 					</c:if>
 				</dl>
-				
 			</div>
 			
 		</c:if>
