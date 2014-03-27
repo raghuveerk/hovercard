@@ -131,13 +131,13 @@ if (Validator.isNull(url) && (userDisplay != null)) {
 									<%
 									}
 									%>
+									<div class="clearfix"></div>
 								</dd>
 							</c:when>
 							<c:otherwise>
 								<dd><liferay-ui:message key="no-friends"/></dd>
 							</c:otherwise>
 						</c:choose>
-						<div class="clearfix"></div>
 					</c:if>
 					
 					<c:if test="<%= showCommonFriends && themeDisplay.getUserId() != userId %>">
@@ -176,5 +176,140 @@ if (Validator.isNull(url) && (userDisplay != null)) {
 			</div>
 			
 		</c:if>
-		
-		
+<style>
+		/* Skin */
+
+.taglib-user-display {
+	a .user-name {
+		text-decoration: underline;
+	}
+
+	.user-name {
+		font-size: 1.1em;
+		font-weight: bold;
+	}
+	
+}
+
+
+.user-pop-up dl{
+    margin-bottom:5px;
+    margin-top:5px
+}
+
+.user-pop-up {
+    display: none;
+    position: absolute; 
+    padding: 15px; 
+    border: 1px solid #ccc;
+    background-color: #ffffff;
+    width: 35%;
+    z-index: 100;
+    -moz-box-shadow: 1px 3px 3px 1px #ccc;
+    -webkit-box-shadow: 1px 3px 3px 1px #ccc;
+    box-shadow: 1px 3px 3px 1px #ccc;
+}
+
+.user-pop-up .user-profile-image{
+    float:left;
+}
+
+.user-pop-up .user-profile-image > img{
+    width: 46px;
+    height: 46px;
+    margin-right:3px;
+}
+
+.user-pop-up .clearfix {
+    clear: both;
+    display: block;
+}
+/* bottom */
+.user-pop-up-bottom{
+    left: 7%;
+    top: 99%;  
+}
+.user-pop-up-bottom:before, div:after {
+    content: "";
+    position: absolute;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    left: 8%;
+    margin-left: -10px;
+}
+ 
+.user-pop-up-bottom:before {
+    border-bottom: 10px solid rgba(0, 0, 0, 0.5);
+    top: -11px;
+}
+ 
+.user-pop-up-bottom:after{
+    border-bottom: 10px solid #FFF;
+    top: -10px;
+    z-index: 1;
+}
+/* Top */
+.user-pop-up-top{
+    left: 7%;
+    top: -282%; 
+}
+.user-pop-up-top:before, div:after {
+    content: "";
+    position: absolute;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    left: 8%;
+    margin-left: -10px;
+}
+ 
+.user-pop-up-top:before {
+    border-top: 10px solid rgba(0, 0, 0, 0.5);
+    top: 246px;
+}
+ 
+.user-pop-up-top:after{
+    border-top: 10px solid #FFF;
+    top: 245px;
+    z-index: 1;
+}
+
+</style>
+<aui:script>  
+        (function(){        
+		    HTMLElement.prototype.removeClass = function(remove) {
+                var newClassName = "";
+                var i;
+                var classes = this.className.split(" ");
+                for(i = 0; i < classes.length; i++) {
+                    if(classes[i] !== remove) {
+                        newClassName += classes[i] + " ";
+                    }
+                }
+                this.className = newClassName;
+            }
+		    
+		    var comments = document.getElementsByClassName("taglib-user-display display-style-2");
+		    comments + document.getElementsByClassName("taglib-user-display display-style-1"); 
+		    for (var i in comments){
+                comment = comments[i];
+		        comment.onmouseover = function(event){
+		            commentElement=this.getElementsByClassName("user-pop-up")[0];
+		            commentElement.style.display="block";
+console.log((commentElement.getBoundingClientRect().top+commentElement.offsetHeight+10) + " > "+ 630);		            if((commentElement.getBoundingClientRect().top+commentElement.offsetHeight+10)>630){
+		                commentElement.removeClass("user-pop-up-top");
+		                commentElement.removeClass("user-pop-up-bottom");
+		                commentElement.className += " user-pop-up-top";
+		            }else{
+		                commentElement.removeClass("user-pop-up-top");
+		                commentElement.removeClass("user-pop-up-bottom");
+		                commentElement.className += " user-pop-up-bottom";
+		            }
+		        }
+		        comment.onmouseout = function(event){
+		            this.getElementsByClassName("user-pop-up")[0].style.display="none";
+		            this.getElementsByClassName("user-pop-up")[0].removeClass("user-pop-up-top");
+		            this.getElementsByClassName("user-pop-up")[0].removeClass("user-pop-up-bottom");
+		        }
+		    }
+     })();
+</aui:script>
