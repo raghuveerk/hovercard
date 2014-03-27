@@ -295,7 +295,7 @@ if (Validator.isNull(url) && (userDisplay != null)) {
 		        comment.onmouseover = function(event){
 		            commentElement=this.getElementsByClassName("user-pop-up")[0];
 		            commentElement.style.display="block";
-console.log((commentElement.getBoundingClientRect().top+commentElement.offsetHeight+10) + " > "+ 630);		            if((commentElement.getBoundingClientRect().top+commentElement.offsetHeight+10)>630){
+            if((commentElement.getBoundingClientRect().top+commentElement.offsetHeight+10)>630){
 		                commentElement.removeClass("user-pop-up-top");
 		                commentElement.removeClass("user-pop-up-bottom");
 		                commentElement.className += " user-pop-up-top";
