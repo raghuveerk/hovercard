@@ -176,7 +176,7 @@ if (Validator.isNull(url) && (userDisplay != null)) {
 			</div>
 			
 		</c:if>
-        
+        </div>
 <style>
 .taglib-user-display .user-pop-up dl{
     margin-bottom:5px;
@@ -217,7 +217,7 @@ if (Validator.isNull(url) && (userDisplay != null)) {
      wrapper.one('.user-pop-up').removeClass('hidden');
      var tooltip = new A.Tooltip({
          trigger: wrapper,
-         position: 'top',
+         position: 'left',
          zIndex: Liferay.zIndex.TOOLTIP,
          srcNode: wrapper.one('.user-pop-up'),
          opacity: 0.9
