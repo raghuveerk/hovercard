@@ -176,7 +176,8 @@ if (Validator.isNull(url) && (userDisplay != null)) {
 			</div>
 			
 		</c:if>
-        </div>
+   
+
 <style>
 .taglib-user-display .user-pop-up dl{
     margin-bottom:5px;
