@@ -26,6 +26,45 @@ if (Validator.isNull(url) && (userDisplay != null)) {
 }
 %>
 
+<style>
+.taglib-user-display {
+	display: inline-block;
+}
+
+.taglib-user-display .user-pop-up dl{
+    margin-bottom:5px;
+    margin-top:5px
+}
+
+.taglib-user-display .user-pop-up {
+    padding: 15px; 
+}
+
+.taglib-user-display .user-pop-up .user-profile-image{
+    float:left;
+}
+
+.taglib-user-display .user-pop-up .user-profile-image > img{
+    width: 46px;
+    height: 46px;
+    margin-right:3px;
+}
+
+.taglib-user-display .user-pop-up .clearfix {
+    clear: both;
+    display: block;
+}
+
+.taglib-user-display .user-pop-up {
+    background-color: #FFFFFF;
+    color: #000000;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+}
+
+</style>
+
 <div id="<%=randomNamespace %>taglib-user-display-wrapper" data-title=" " class="taglib-user-display display-style-<%= displayStyle %>">
 
 	<%
@@ -176,48 +215,14 @@ if (Validator.isNull(url) && (userDisplay != null)) {
 			</div>
 			
 		</c:if>
-        </div>
-<style>
-.taglib-user-display .user-pop-up dl{
-    margin-bottom:5px;
-    margin-top:5px
-}
-
-.taglib-user-display .user-pop-up {
-    padding: 15px; 
-}
-
-.taglib-user-display .user-pop-up .user-profile-image{
-    float:left;
-}
-
-.taglib-user-display .user-pop-up .user-profile-image > img{
-    width: 46px;
-    height: 46px;
-    margin-right:3px;
-}
-
-.taglib-user-display .user-pop-up .clearfix {
-    clear: both;
-    display: block;
-}
-
-.taglib-user-display .user-pop-up {
-    background-color: #FFFFFF;
-    color: #000000;
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-}
-
-</style>
+   
 <aui:script use="aui-tooltip">  
      
      var wrapper = A.one('#<%=randomNamespace %>taglib-user-display-wrapper');
      wrapper.one('.user-pop-up').removeClass('hidden');
      var tooltip = new A.Tooltip({
          trigger: wrapper,
-         position: 'left',
+         position: 'right',
          zIndex: Liferay.zIndex.TOOLTIP,
          srcNode: wrapper.one('.user-pop-up'),
          opacity: 0.9
