@@ -25,6 +25,8 @@
 <%@ page import="com.liferay.portal.model.Phone" %>
 <%@ page import="com.liferay.portlet.social.model.SocialRelationConstants" %>
 <%@ page import="com.liferay.portal.util.comparator.UserLoginDateComparator" %>
+<%@ page import="com.liferay.portal.util.PortalUtil" %>
+<%@ page import="com.liferay.portal.kernel.util.StringPool" %>
 
 <%
 final String HOVER_USER_INFO_SHOW = "hover.user.info.show";
@@ -43,4 +45,6 @@ long userId = userDisplay.getUserId();
 String userName = GetterUtil.getString((String)request.getAttribute("liferay-ui:user-display:user-name"));
 String url = (String)request.getAttribute("liferay-ui:user-display:url");
 int displayStyle = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:user-display:displayStyle"));
+
+String randomNamespace = PortalUtil.generateRandomKey(request, "taglib_ui_user_display") + StringPool.UNDERLINE;
 %>

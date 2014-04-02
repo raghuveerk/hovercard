@@ -26,7 +26,7 @@ if (Validator.isNull(url) && (userDisplay != null)) {
 }
 %>
 
-<div class="taglib-user-display display-style-<%= displayStyle %>">
+<div id="<%=randomNamespace %>taglib-user-display-wrapper" data-title=" " class="taglib-user-display display-style-<%= displayStyle %>">
 
 	<%
 	String taglibAlt = (userDisplay != null) ? HtmlUtil.escapeAttribute(userDisplay.getFullName()) : LanguageUtil.get(pageContext, "generic-portrait");
@@ -40,7 +40,7 @@ if (Validator.isNull(url) && (userDisplay != null)) {
 		taglibSrc = UserConstants.getPortraitURL(themeDisplay.getPathImage(), true, 0);
 	}
 	%>
-	<aui:a href="<%= url %>">
+	<a href="<%= url %>">
 		<span class="user-profile-image">
 			<img alt="<%= taglibAlt %>" class="avatar" src="<%= HtmlUtil.escape(taglibSrc) %>" width="65" />
 		</span>
@@ -48,7 +48,7 @@ if (Validator.isNull(url) && (userDisplay != null)) {
 		<span class="user-name">
 			<%= (userDisplay != null) ? HtmlUtil.escape(userDisplay.getFullName()) : HtmlUtil.escape(userName) %>
 		</span>
-	</aui:a>
+	</a>
 	
 	<div class="user-details">
 	
@@ -66,7 +66,7 @@ if (Validator.isNull(url) && (userDisplay != null)) {
 		%>
 		<c:if test="<%= showPopUp %>">
 		
-			<div class="user-pop-up">
+			<div class="user-pop-up hidden">
 			
 				<dl>
 					<c:if test="<%= showEmailAddress %>">
@@ -176,140 +176,52 @@ if (Validator.isNull(url) && (userDisplay != null)) {
 			</div>
 			
 		</c:if>
+        
 <style>
-		/* Skin */
-
-.taglib-user-display {
-	a .user-name {
-		text-decoration: underline;
-	}
-
-	.user-name {
-		font-size: 1.1em;
-		font-weight: bold;
-	}
-	
-}
-
-
-.user-pop-up dl{
+.taglib-user-display .user-pop-up dl{
     margin-bottom:5px;
     margin-top:5px
 }
 
-.user-pop-up {
-    display: none;
-    position: absolute; 
+.taglib-user-display .user-pop-up {
     padding: 15px; 
-    border: 1px solid #ccc;
-    background-color: #ffffff;
-    width: 35%;
-    z-index: 100;
-    -moz-box-shadow: 1px 3px 3px 1px #ccc;
-    -webkit-box-shadow: 1px 3px 3px 1px #ccc;
-    box-shadow: 1px 3px 3px 1px #ccc;
 }
 
-.user-pop-up .user-profile-image{
+.taglib-user-display .user-pop-up .user-profile-image{
     float:left;
 }
 
-.user-pop-up .user-profile-image > img{
+.taglib-user-display .user-pop-up .user-profile-image > img{
     width: 46px;
     height: 46px;
     margin-right:3px;
 }
 
-.user-pop-up .clearfix {
+.taglib-user-display .user-pop-up .clearfix {
     clear: both;
     display: block;
 }
-/* bottom */
-.user-pop-up-bottom{
-    left: 7%;
-    top: 99%;  
-}
-.user-pop-up-bottom:before, div:after {
-    content: "";
-    position: absolute;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    left: 8%;
-    margin-left: -10px;
-}
- 
-.user-pop-up-bottom:before {
-    border-bottom: 10px solid rgba(0, 0, 0, 0.5);
-    top: -11px;
-}
- 
-.user-pop-up-bottom:after{
-    border-bottom: 10px solid #FFF;
-    top: -10px;
-    z-index: 1;
-}
-/* Top */
-.user-pop-up-top{
-    left: 7%;
-    top: -282%; 
-}
-.user-pop-up-top:before, div:after {
-    content: "";
-    position: absolute;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    left: 8%;
-    margin-left: -10px;
-}
- 
-.user-pop-up-top:before {
-    border-top: 10px solid rgba(0, 0, 0, 0.5);
-    top: 246px;
-}
- 
-.user-pop-up-top:after{
-    border-top: 10px solid #FFF;
-    top: 245px;
-    z-index: 1;
+
+.taglib-user-display .user-pop-up {
+    background-color: #FFFFFF;
+    color: #000000;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
 }
 
 </style>
-<aui:script>  
-        (function(){        
-		    HTMLElement.prototype.removeClass = function(remove) {
-                var newClassName = "";
-                var i;
-                var classes = this.className.split(" ");
-                for(i = 0; i < classes.length; i++) {
-                    if(classes[i] !== remove) {
-                        newClassName += classes[i] + " ";
-                    }
-                }
-                this.className = newClassName;
-            }
-		    
-		    var comments = document.getElementsByClassName("taglib-user-display display-style-2");
-		    comments + document.getElementsByClassName("taglib-user-display display-style-1"); 
-		    for (var i in comments){
-                comment = comments[i];
-		        comment.onmouseover = function(event){
-		            commentElement=this.getElementsByClassName("user-pop-up")[0];
-		            commentElement.style.display="block";
-            if((commentElement.getBoundingClientRect().top+commentElement.offsetHeight+10)>630){
-		                commentElement.removeClass("user-pop-up-top");
-		                commentElement.removeClass("user-pop-up-bottom");
-		                commentElement.className += " user-pop-up-top";
-		            }else{
-		                commentElement.removeClass("user-pop-up-top");
-		                commentElement.removeClass("user-pop-up-bottom");
-		                commentElement.className += " user-pop-up-bottom";
-		            }
-		        }
-		        comment.onmouseout = function(event){
-		            this.getElementsByClassName("user-pop-up")[0].style.display="none";
-		            this.getElementsByClassName("user-pop-up")[0].removeClass("user-pop-up-top");
-		            this.getElementsByClassName("user-pop-up")[0].removeClass("user-pop-up-bottom");
-		        }
-		    }
-     })();
+<aui:script use="aui-tooltip">  
+     
+     var wrapper = A.one('#<%=randomNamespace %>taglib-user-display-wrapper');
+     wrapper.one('.user-pop-up').removeClass('hidden');
+     var tooltip = new A.Tooltip({
+         trigger: wrapper,
+         position: 'top',
+         zIndex: Liferay.zIndex.TOOLTIP,
+         srcNode: wrapper.one('.user-pop-up'),
+         opacity: 0.9
+     }).render();
+     tooltip.hide();
+     
 </aui:script>
