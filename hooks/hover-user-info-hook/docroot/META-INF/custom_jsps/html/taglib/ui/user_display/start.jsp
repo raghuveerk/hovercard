@@ -215,7 +215,7 @@ if (Validator.isNull(url) && (userDisplay != null)) {
 			</div>
 			
 		</c:if>
-   
+
 <aui:script use="aui-tooltip">  
      
      var wrapper = A.one('#<%=randomNamespace %>taglib-user-display-wrapper');
